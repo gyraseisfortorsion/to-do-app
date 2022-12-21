@@ -23,12 +23,15 @@ struct TaskField: View {
                 dateFormatter.dateFormat = "HH:m"
                 let components = enteredtext.components(separatedBy: "_")
                 
-                tasks.tasks.append(Task(
-                    title: components[0],
-                    description:"",
-                    date: components.count>1 ? dateFormatter.date(from: components[1]) ?? Date(): Date(),
-                    isCompleted: false))
+//                tasks.tasks.append(Task(
+//                    title: components[0],
+//                    date: components.count>1 ? dateFormatter.date(from: components[1]) ?? tasks.activeDay: tasks.activeDay,
+//                    isCompleted: false))
                 enteredtext=""
+                tasks.newTask(
+                    title:components[0],
+                    date: components.count>1 ? (dateFormatter.date(from: components[1]) ?? tasks.activeDay) : tasks.activeDay
+                )
             }
             .foregroundColor(Color.black)
           

@@ -23,6 +23,7 @@ struct ContentView: View {
             //.flippedUpsideDown()
             //
         }
+        .transition(.move(edge: .bottom))
         .animation(.default)
         .background(.white)
     }

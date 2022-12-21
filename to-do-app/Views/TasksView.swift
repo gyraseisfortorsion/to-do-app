@@ -25,12 +25,17 @@ struct TasksView: View {
                     //.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                 }
             }
-            else{
-                ProgressView()
-            }
+//            else{
+//                ProgressView()
+//            }
 
         }
         .onChange(of: tasksView.activeDay){item in tasksView.filterTasks()
+            print(tasksView.tasks.count)
+        }
+        .onChange(of: tasksView.tasks.count){item in tasksView.filterTasks()
+            print(tasksView.tasks.count)
+            
         }
         .listStyle(.sidebar)
         .padding(.horizontal, -20)

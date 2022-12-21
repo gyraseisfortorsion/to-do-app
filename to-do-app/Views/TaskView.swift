@@ -14,7 +14,7 @@ struct TaskView: View {
             .onTapGesture (count: 2){
                 task.isCompleted.toggle()
             }
-            .transition(.slide)
+            .transition(.move(edge: .bottom))
             .animation(.spring())
             //.background(Color.black)
             
@@ -62,7 +62,7 @@ struct TaskView: View {
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TaskView(task: Task(title: "Laundry", description: "Do Laundry", date: Date(), isCompleted: false))
+            TaskView(task: Task(title: "Laundry", date: Date(), isCompleted: false))
           
         }
             

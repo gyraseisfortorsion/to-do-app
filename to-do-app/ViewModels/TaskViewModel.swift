@@ -11,9 +11,9 @@ import SwiftUI
 class TasksViewModel: ObservableObject {
     @Published var taskLimit:Int
     @Published var tasks:[Task] = [
-        Task(title: "Laundry", description: "do dishes", date: Date.now, isCompleted: false),
-        Task(title: "Dishes", description: "do dishes", date: Date.now.addingTimeInterval(86400), isCompleted: false),
-        Task(title: "Grocery", description: "do dishes", date: Date.now.addingTimeInterval(2*86400), isCompleted: false)
+        Task(title: "Laundry", date: Date.now, isCompleted: false),
+        Task(title: "Dishes", date: Date.now.addingTimeInterval(-86400), isCompleted: false),
+        Task(title: "Grocery", date: Date.now.addingTimeInterval(86400), isCompleted: false)
     ]
     @Published var dates:[Date]=[]
     @Published var today = Date()
@@ -25,11 +25,12 @@ class TasksViewModel: ObservableObject {
         fetchCurrentWeek()
     }
     
-    func newTask(title:String, description:String, date:Date=Date.now){
-        let task = Task(title: title, description: description, date: date, isCompleted: false)
+    func newTask(title:String, date:Date=Date.now){
+        let task = Task(title: title, date: date, isCompleted: false)
         tasks.append(task)
     }
     func deleteTask(indexSet:IndexSet){
+        filteredTasks?.remove(atOffsets: indexSet)
         tasks.remove(atOffsets: indexSet)
     }
     func fetchCurrentWeek() {
@@ -63,6 +64,7 @@ class TasksViewModel: ObservableObject {
             DispatchQueue.main.async{
                 withAnimation{
                     self.filteredTasks=filtered
+                    
                 }
             }
         }
