@@ -19,10 +19,18 @@ struct TaskField: View {
             }
             .multilineTextAlignment(.center)
             .onSubmit {
-                tasks.tasks.append(Task(title: enteredtext, description: "", date: Date(), isCompleted: false))
+                let dateFormatter=DateFormatter()
+                dateFormatter.dateFormat = "HH:m"
+                let components = enteredtext.components(separatedBy: "_")
+                
+                tasks.tasks.append(Task(
+                    title: components[0],
+                    description:"",
+                    date: components.count>1 ? dateFormatter.date(from: components[1]) ?? Date(): Date(),
+                    isCompleted: false))
                 enteredtext=""
             }
-            .foregroundColor(Color.white)
+            .foregroundColor(Color.black)
           
             
             

@@ -14,6 +14,7 @@ class TasksViewModel: ObservableObject {
         Task(title: "dishes", description: "do dishes", date: .init(timeIntervalSince1970:1641646097), isCompleted: false)
     ]
     @Published var dates:[Date]=[]
+    @Published var today = Date()
     
     init(taskLimit:Int){
         self.taskLimit=taskLimit
@@ -40,6 +41,14 @@ class TasksViewModel: ObservableObject {
         }
         
     }
+    
+    func isToday(date:Date)->Bool{
+        let Calendar = Calendar.current
+        
+        return Calendar.isDate(today, inSameDayAs: date)
+    }
+    
+    
     
     
 }

@@ -14,16 +14,14 @@ struct DatesView: View {
         ScrollView(.horizontal, showsIndicators: false){
             HStack{
                 ForEach(tasks.dates, id: \.self) {date in
-                    DateView(date: date, isActive: false)
+                    DateView(date: date, isToday: tasks.isToday(date: date), isActive: false)
                         .padding(.top, 20)
                 }
             }
-            .padding(.bottom, 100)
-   
-        
-
-            
+            .padding(.bottom, 40)
+ 
         }
+        .animation(.none)
     }
 }
 

@@ -14,17 +14,20 @@ struct TaskView: View {
             .onTapGesture (count: 2){
                 task.isCompleted.toggle()
             }
+            .transition(.slide)
             .animation(.spring())
+            //.background(Color.black)
+            
     }
     @ViewBuilder
     func taskTab(isCompleted: Bool)->some View{
         ZStack{
             HStack{
-                VStack{Divider().frame(maxHeight:0.5).background(Color.white).padding()}
+                VStack{Divider().frame(maxHeight:0.5).background(Color.black).padding()}
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(Color.orange)
+                    .foregroundColor(Color(.systemGreen))
                     .scaleEffect(isCompleted ? 2: 0)
-                VStack{Divider().frame(maxHeight:0.5).background(Color.white).padding()}
+                VStack{Divider().frame(maxHeight:0.5).background(Color.black).padding()}
             }
            
     
@@ -48,6 +51,7 @@ struct TaskView: View {
             .scaleEffect(!isCompleted ? 1 : 0) 
         
         }
+        //.background(Color.black)
             
             
     }
