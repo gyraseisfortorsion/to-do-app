@@ -17,6 +17,7 @@
 		F910CF28294DCE9F0042AD94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910CF27294DCE9F0042AD94 /* ContentView.swift */; };
 		F910CF2A294DCEA10042AD94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F910CF29294DCEA10042AD94 /* Assets.xcassets */; };
 		F910CF2D294DCEA10042AD94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F910CF2C294DCEA10042AD94 /* Preview Assets.xcassets */; };
+		F9CCE888295368E600FD8EB8 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CCE887295368E600FD8EB8 /* TasksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		F910CF27294DCE9F0042AD94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F910CF29294DCEA10042AD94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F910CF2C294DCEA10042AD94 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F9CCE887295368E600FD8EB8 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				F910CF27294DCE9F0042AD94 /* ContentView.swift */,
 				F90A2A8B2950F5A40068E3AA /* DateView.swift */,
 				F90A2A8D295104A20068E3AA /* DatesView.swift */,
+				F9CCE887295368E600FD8EB8 /* TasksView.swift */,
 				F90A2A8F295238250068E3AA /* TaskView.swift */,
 				F90A2A9129525F830068E3AA /* TaskField.swift */,
 			);
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F90A2A8E295104A20068E3AA /* DatesView.swift in Sources */,
+				F9CCE888295368E600FD8EB8 /* TasksView.swift in Sources */,
 				F90A2A9229525F830068E3AA /* TaskField.swift in Sources */,
 				F90A2A90295238250068E3AA /* TaskView.swift in Sources */,
 				F90A2A8C2950F5A40068E3AA /* DateView.swift in Sources */,

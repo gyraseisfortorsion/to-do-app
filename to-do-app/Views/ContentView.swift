@@ -18,26 +18,10 @@ struct ContentView: View {
         
         VStack(spacing:20){
             DatesView()
-            List{
-                TaskField()
-                Spacer()
-                ForEach(TaskViewModel.tasks){task in
-                    TaskView(task:task)
-                        .padding(.vertical, 10)
-                    //.flippedUpsideDown()
-                }
-                
-                .onDelete(perform: TaskViewModel.deleteTask)
-                //.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-
-            }
-            .listStyle(.sidebar)
-            .padding(.horizontal, -20)
+            TasksView()
             
             //.flippedUpsideDown()
             //
-           
-            
         }
         .animation(.default)
         .background(.white)

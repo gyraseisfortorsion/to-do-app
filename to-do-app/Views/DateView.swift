@@ -10,11 +10,12 @@ import SwiftUI
 struct DateView: View {
     let date:Date
     let isToday: Bool
+    @EnvironmentObject var tasks: TasksViewModel
     @State var isActive: Bool
     var body: some View {
         
         DataTab(isActive: isActive).onTapGesture {
-            isActive.toggle()
+            tasks.activeDay=date
         }
     
         .animation(.spring(response: 0.3, dampingFraction: 0.7))
@@ -27,7 +28,7 @@ struct DateView: View {
         ZStack{
             VStack(spacing: 15){
                 Text(date.formatted(.dateTime.day())).foregroundColor(Color(.black))
-                    .scaleEffect(isActive ? 1 : 0)
+                    .scaleEffect(date==tasks.activeDay ? 1 : 0)
                 
                     Text(date.formatted(.dateTime.weekday())).foregroundColor(Color(.black))
                         .font(.headline)
@@ -43,19 +44,19 @@ struct DateView: View {
                 
                 Image(systemName: "circle.circle.fill")
                     .foregroundColor(Color(.black))
-                    .scaleEffect(isActive ? 1 : 0)
+                    .scaleEffect(date==tasks.activeDay ? 1 : 0)
             }
-            .frame(width:40, height: isActive ? 90 : 40)
+            .frame(width:40, height: date==tasks.activeDay ? 90 : 40)
             .padding()
-            .background(Color( isActive ? .systemGreen : .white)
+            .background(Color( date==tasks.activeDay ? .systemGreen : .white)
                 .transition(.slide)
             )
-            .cornerRadius(isActive ? 40: 20)
-            .shadow(color: Color(isActive ? .white : .orange), radius: 0, y: isActive ? 0 :(!isToday ? 0 : 20))
+            .cornerRadius(date==tasks.activeDay ? 40: 20)
+            .shadow(color: Color(date==tasks.activeDay ? .white : .orange), radius: 0, y: date==tasks.activeDay ? 0 :(!isToday ? 0 : 20))
             .padding(.horizontal, 5)
-            .scaleEffect(isActive ? 1.1 : 1)
+            .scaleEffect(date==tasks.activeDay ? 1.1 : 1)
             //.offset(x: isToday ? 10 : 0, y: isToday ?  -20: 0)
-            .shadow(radius: isActive ? 0:10)
+            .shadow(radius: date==tasks.activeDay ? 0:10)
        
         }
         //var isActive=isActive1
@@ -68,5 +69,6 @@ struct DateView: View {
 struct DateView_Previews: PreviewProvider {
     static var previews: some View {
         DateView(date:Date(), isToday: true, isActive: true)
+            .environmentObject(TasksViewModel(taskLimit: 3))
     }
 }

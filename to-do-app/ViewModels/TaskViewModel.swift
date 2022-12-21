@@ -6,15 +6,19 @@
 //
 
 import Foundation
+import SwiftUI
 
 class TasksViewModel: ObservableObject {
     @Published var taskLimit:Int
     @Published var tasks:[Task] = [
-        Task(title: "dishes", description: "do dishes", date: .init(timeIntervalSince1970:1641649097), isCompleted: false),
-        Task(title: "dishes", description: "do dishes", date: .init(timeIntervalSince1970:1641646097), isCompleted: false)
+        Task(title: "Laundry", description: "do dishes", date: Date.now, isCompleted: false),
+        Task(title: "Dishes", description: "do dishes", date: Date.now.addingTimeInterval(86400), isCompleted: false),
+        Task(title: "Grocery", description: "do dishes", date: Date.now.addingTimeInterval(2*86400), isCompleted: false)
     ]
     @Published var dates:[Date]=[]
     @Published var today = Date()
+    @Published var activeDay = Date()
+    @Published var filteredTasks:[Task]?
     
     init(taskLimit:Int){
         self.taskLimit=taskLimit
@@ -45,10 +49,24 @@ class TasksViewModel: ObservableObject {
     func isToday(date:Date)->Bool{
         let Calendar = Calendar.current
         
-        return Calendar.isDate(today, inSameDayAs: date)
+        return Calendar.isDate(today, inSameDayAs: self.today)
     }
     
-    
+    func filterTasks(){
+        DispatchQueue.global(qos: .userInteractive).async {
+            let calendar = Calendar.current
+             
+            let filtered = self.tasks.filter{
+                return calendar.isDate($0.date, inSameDayAs: self.activeDay)
+            }
+            
+            DispatchQueue.main.async{
+                withAnimation{
+                    self.filteredTasks=filtered
+                }
+            }
+        }
+    }
     
     
 }
