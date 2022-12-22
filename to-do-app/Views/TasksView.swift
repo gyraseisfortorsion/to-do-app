@@ -40,10 +40,9 @@ struct TasksView: View {
         .onChange(of: tasksView.adding){item in
             tasksView.filterTasks()
         }
-//        .onChange(of: tasksView.removing){item in
-//            tasks.remove()
-//            tasksView.filterTasks()
-//        }
+        .onChange(of: tasksView.removing){item in
+            tasksView.filterTasks()
+        }
         
         .listStyle(.sidebar)
         .padding(.horizontal, -20)

@@ -11,9 +11,9 @@ import SwiftUI
 class TasksViewModel: ObservableObject {
     @Published var taskLimit:Int
     @Published var tasks:[Task] = [
-        Task(secondId:1, title: "Laundry",  date: Date.now, isCompleted: false),
-        Task(secondId:2, title: "Dishes", date: Date.now.addingTimeInterval(-86400), isCompleted: false),
-        Task(secondId:3, title: "Grocery", date: Date.now.addingTimeInterval(86400), isCompleted: false)
+        Task(secondId:0, title: "Laundry",  date: Date.now, isCompleted: false),
+        Task(secondId:1, title: "Dishes", date: Date.now.addingTimeInterval(-86400), isCompleted: false),
+        Task(secondId:2, title: "Grocery", date: Date.now.addingTimeInterval(86400), isCompleted: false)
     ]
     @Published var dates:[Date]=[]
     @Published var today = Date()
@@ -21,6 +21,8 @@ class TasksViewModel: ObservableObject {
     @Published var filteredTasks:[Task]?
     @Published var adding: Bool = false
     @Published var removing: Bool = false
+    @Published var nextTaskId: Int=3
+    @Published var maxTaskId: Int=0
     
     init(taskLimit:Int){
         self.taskLimit=taskLimit
@@ -28,24 +30,41 @@ class TasksViewModel: ObservableObject {
     }
     
     func newTask(title:String, date:Date=Date.now){
+        
         adding.toggle()
-        let task = Task(secondId: self.tasks.count+1,title: title, date: date, isCompleted: false)
+        nextTaskId+=1
+        let task = Task(secondId: nextTaskId,title: title, date: date, isCompleted: false)
         tasks.append(task)
+        
+//        if nextTaskId>=maxTaskId{
+//            nextTaskId+=1
+//            maxTaskId=nextTaskId
+//        }
     }
     func deleteTask(indexSet:IndexSet){
-        removing.toggle()
+   
         //self.filterTasks()
         //tasks.remove(atOffsets: indexSet)
+        
         for index in indexSet{
             let tempTask=filteredTasks?[index]
-            for i in 0...tasks.count-1{
-                if tasks[i].secondId == tempTask?.secondId{
-                    tasks.remove(at: i)
-                }
-            }
+//            nextTaskId=tempTask?.secondId ?? tasks.count
+//            if nextTaskId==maxTaskId{
+//                maxTaskId-=1
+//            }
+           
+                
+                    //filteredTasks?.remove(atOffsets: indexSet)
+            tasks.remove(at: tasks.firstIndex(where: {  $0.secondId == tempTask?.secondId })!)
+                   
+                
             
+            
+ 
         }
-        filteredTasks?.remove(atOffsets: indexSet)
+        
+        removing.toggle()
+        //filteredTasks?.remove(atOffsets: indexSet)
     }
     func fetchCurrentWeek() {
         
