@@ -10,6 +10,7 @@ import Foundation
 struct Task : Identifiable{
     
     var id = UUID().uuidString
+    let secondId:Int
     var title:String
     var date: Date
     var isCompleted: Bool

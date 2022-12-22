@@ -22,21 +22,29 @@ struct TasksView: View {
                         //.flippedUpsideDown()
                     }
                     .onDelete(perform: tasksView.deleteTask)
-                    //.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                 }
+                
+                
+                //.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
             }
-//            else{
-//                ProgressView()
-//            }
-
-        }
-        .onChange(of: tasksView.activeDay){item in tasksView.filterTasks()
-            print(tasksView.tasks.count)
-        }
-        .onChange(of: tasksView.tasks.count){item in tasksView.filterTasks()
-            print(tasksView.tasks.count)
+            
+            //            else{
+            //                ProgressView()
+            //            }
             
         }
+        .onChange(of: tasksView.activeDay){item in
+            tasksView.filterTasks()
+            
+        }
+        .onChange(of: tasksView.adding){item in
+            tasksView.filterTasks()
+        }
+//        .onChange(of: tasksView.removing){item in
+//            tasks.remove()
+//            tasksView.filterTasks()
+//        }
+        
         .listStyle(.sidebar)
         .padding(.horizontal, -20)
     }

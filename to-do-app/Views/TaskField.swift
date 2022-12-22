@@ -20,23 +20,38 @@ struct TaskField: View {
             .multilineTextAlignment(.center)
             .onSubmit {
                 let dateFormatter=DateFormatter()
-                dateFormatter.dateFormat = "HH:m"
+                dateFormatter.dateFormat = "hh:mm"
+
+
                 let components = enteredtext.components(separatedBy: "_")
                 
-//                tasks.tasks.append(Task(
-//                    title: components[0],
-//                    date: components.count>1 ? dateFormatter.date(from: components[1]) ?? tasks.activeDay: tasks.activeDay,
-//                    isCompleted: false))
-                enteredtext=""
+                //                tasks.tasks.append(Task(
+                //                    title: components[0],
+                //                    date: components.count>1 ? dateFormatter.date(from: components[1]) ?? tasks.activeDay: tasks.activeDay,
+                //                    isCompleted: false))
+                
+                var newDate=tasks.activeDay
+
+                if components.count>1{
+                    //newDate =  (dateFormatter.date(from: components[1]) ?? tasks.activeDay)
+                    let timeComponents = components[1].components(separatedBy: ":")
+                    newDate = newDate.addingTimeInterval((Double(timeComponents[0]) ?? 0)*3600+(Double(timeComponents[1]) ?? 0)*60)
+                }
+
+           
+                 
+                
                 tasks.newTask(
-                    title:components[0],
-                    date: components.count>1 ? (dateFormatter.date(from: components[1]) ?? tasks.activeDay) : tasks.activeDay
+                    title: components[0],
+                    date: newDate
                 )
+//                tasks.activeDay=dateFormatter.date(from: components[1]) ?? tasks.activeDay
+                enteredtext=""
             }
             .foregroundColor(Color.black)
-          
-            
-            
+        
+        
+        
     }
 }
 

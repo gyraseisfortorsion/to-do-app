@@ -11,14 +11,16 @@ import SwiftUI
 class TasksViewModel: ObservableObject {
     @Published var taskLimit:Int
     @Published var tasks:[Task] = [
-        Task(title: "Laundry", date: Date.now, isCompleted: false),
-        Task(title: "Dishes", date: Date.now.addingTimeInterval(-86400), isCompleted: false),
-        Task(title: "Grocery", date: Date.now.addingTimeInterval(86400), isCompleted: false)
+        Task(secondId:1, title: "Laundry",  date: Date.now, isCompleted: false),
+        Task(secondId:2, title: "Dishes", date: Date.now.addingTimeInterval(-86400), isCompleted: false),
+        Task(secondId:3, title: "Grocery", date: Date.now.addingTimeInterval(86400), isCompleted: false)
     ]
     @Published var dates:[Date]=[]
     @Published var today = Date()
     @Published var activeDay = Date()
     @Published var filteredTasks:[Task]?
+    @Published var adding: Bool = false
+    @Published var removing: Bool = false
     
     init(taskLimit:Int){
         self.taskLimit=taskLimit
@@ -26,12 +28,24 @@ class TasksViewModel: ObservableObject {
     }
     
     func newTask(title:String, date:Date=Date.now){
-        let task = Task(title: title, date: date, isCompleted: false)
+        adding.toggle()
+        let task = Task(secondId: self.tasks.count+1,title: title, date: date, isCompleted: false)
         tasks.append(task)
     }
     func deleteTask(indexSet:IndexSet){
+        removing.toggle()
+        //self.filterTasks()
+        //tasks.remove(atOffsets: indexSet)
+        for index in indexSet{
+            let tempTask=filteredTasks?[index]
+            for i in 0...tasks.count-1{
+                if tasks[i].secondId == tempTask?.secondId{
+                    tasks.remove(at: i)
+                }
+            }
+            
+        }
         filteredTasks?.remove(atOffsets: indexSet)
-        tasks.remove(atOffsets: indexSet)
     }
     func fetchCurrentWeek() {
         
@@ -64,7 +78,6 @@ class TasksViewModel: ObservableObject {
             DispatchQueue.main.async{
                 withAnimation{
                     self.filteredTasks=filtered
-                    
                 }
             }
         }

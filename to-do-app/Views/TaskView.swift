@@ -42,7 +42,7 @@ struct TaskView: View {
                         
                     
                     Spacer()
-                    Text(task.date, style: .time).padding().font(.title2)
+                Text(task.date, style: .time).padding().font(.title2)
             }
             .frame(width: UIScreen.main.bounds.width/1.1, height: 100, alignment: .leading)
             .background(Color(.white))
@@ -62,7 +62,7 @@ struct TaskView: View {
 struct TaskView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TaskView(task: Task(title: "Laundry", date: Date(), isCompleted: false))
+            TaskView(task: Task(secondId:1, title: "Laundry", date: Date(), isCompleted: false))
           
         }
             
