@@ -22,7 +22,7 @@ class TasksViewModel: ObservableObject {
     @Published var adding: Bool = false
     @Published var removing: Bool = false
     @Published var nextTaskId: Int=3
-    @Published var maxTaskId: Int=0
+    @Published var maxTaskId: Int=2
     
     init(taskLimit:Int){
         self.taskLimit=taskLimit
@@ -32,14 +32,14 @@ class TasksViewModel: ObservableObject {
     func newTask(title:String, date:Date=Date.now){
         
         adding.toggle()
-        nextTaskId+=1
+//        nextTaskId+=1
+        if nextTaskId>=maxTaskId{
+            maxTaskId=nextTaskId
+        }
         let task = Task(secondId: nextTaskId,title: title, date: date, isCompleted: false)
         tasks.append(task)
-        
-//        if nextTaskId>=maxTaskId{
-//            nextTaskId+=1
-//            maxTaskId=nextTaskId
-//        }
+        nextTaskId+=1
+
     }
     func deleteTask(indexSet:IndexSet){
    
@@ -48,10 +48,10 @@ class TasksViewModel: ObservableObject {
         
         for index in indexSet{
             let tempTask=filteredTasks?[index]
-//            nextTaskId=tempTask?.secondId ?? tasks.count
-//            if nextTaskId==maxTaskId{
-//                maxTaskId-=1
-//            }
+            nextTaskId=tempTask?.secondId ?? tasks.count
+            if nextTaskId==maxTaskId{
+                maxTaskId-=1
+            }
            
                 
                     //filteredTasks?.remove(atOffsets: indexSet)

@@ -12,13 +12,13 @@ struct TasksView: View {
     var body: some View {
         
         List{
-            TaskField()
+            
             Spacer()
             if let tasks = tasksView.filteredTasks{
                 if !tasks.isEmpty{
                     ForEach(tasks){task in
                         TaskView(task:task)
-                            .padding(.vertical, 10)
+                            .padding(.vertical, 5)
                         //.flippedUpsideDown()
                     }
                     .onDelete(perform: tasksView.deleteTask)
@@ -27,6 +27,7 @@ struct TasksView: View {
                 
                 //.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
             }
+            
             
             //            else{
             //                ProgressView()
@@ -46,6 +47,7 @@ struct TasksView: View {
         
         .listStyle(.sidebar)
         .padding(.horizontal, -20)
+        
     }
 }
 

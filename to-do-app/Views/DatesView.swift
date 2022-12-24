@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DatesView: View {
     @EnvironmentObject var tasks: TasksViewModel
+    @State var isActive1: Bool = false
     var body: some View {
   
         ScrollView(.horizontal, showsIndicators: false){
@@ -18,13 +19,15 @@ struct DatesView: View {
                         .padding(.top, 20)
                         .onTapGesture {
                             tasks.activeDay=date
+                            isActive1=true
                         }
                 }
             }
-            .padding(.bottom, 40)
- 
+            .padding(.bottom, isActive1 ? 0 : 40 )
+            .padding(.top, 40)
+            .ignoresSafeArea()
         }
-        .animation(.none)
+        .animation(.default)
     }
 }
 

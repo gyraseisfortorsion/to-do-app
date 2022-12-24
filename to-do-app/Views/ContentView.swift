@@ -17,15 +17,24 @@ struct ContentView: View {
     var body: some View {
         
         VStack(spacing:20){
-            DatesView()
-            TasksView()
             
+            TasksView()
+            TaskField()
+            //.shadow(color: .black, radius: 5, x: 0, y: -10)
+                //.frame(width: 350, height: 100, alignment: .center)
+                .shadow(color: .white, radius: 0)
+//                .cornerRadius(10)
+                
+                
+            
+            DatesView()
             //.flippedUpsideDown()
             //
         }
         .transition(.move(edge: .bottom))
         .animation(.default)
-        .background(.white)
+        .background(.black)
+        .ignoresSafeArea()
     }
 }
 

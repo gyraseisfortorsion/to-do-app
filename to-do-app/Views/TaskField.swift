@@ -17,6 +17,7 @@ struct TaskField: View {
             .onTapGesture {
                 isFocused = true
             }
+            .frame(width: 350, height: 100)
             .multilineTextAlignment(.center)
             .onSubmit {
                 let dateFormatter=DateFormatter()
@@ -48,7 +49,7 @@ struct TaskField: View {
 //                tasks.activeDay=dateFormatter.date(from: components[1]) ?? tasks.activeDay
                 enteredtext=""
             }
-            .foregroundColor(Color.black)
+            .foregroundColor(Color.white)
         
         
         

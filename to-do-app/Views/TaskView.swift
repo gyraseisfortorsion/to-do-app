@@ -23,11 +23,11 @@ struct TaskView: View {
     func taskTab(isCompleted: Bool)->some View{
         ZStack{
             HStack{
-                VStack{Divider().frame(maxHeight:0.5).background(Color.black).padding()}
+                VStack{Divider().frame(maxHeight:0.5).background(Color.white).padding()}
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(Color(.systemGreen))
+                    .foregroundColor(Color(.orange))
                     .scaleEffect(isCompleted ? 2: 0)
-                VStack{Divider().frame(maxHeight:0.5).background(Color.black).padding()}
+                VStack{Divider().frame(maxHeight:0.5).background(Color.white).padding()}
             }
            
     

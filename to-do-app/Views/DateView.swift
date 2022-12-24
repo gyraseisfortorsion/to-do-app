@@ -48,11 +48,11 @@ struct DateView: View {
             }
             .frame(width:40, height: date==tasks.activeDay ? 90 : 40)
             .padding()
-            .background(Color( date==tasks.activeDay ? .systemGreen : .white)
+            .background(Color( date==tasks.activeDay ? .orange : .white)
                 .transition(.slide)
             )
             .cornerRadius(date==tasks.activeDay ? 40: 20)
-            .shadow(color: Color(date==tasks.activeDay ? .white : .black), radius: 0, y: date==tasks.activeDay ? 0 :(!isToday ? 0 : 20))
+            .shadow(color: Color(date==tasks.activeDay ? .white : .orange), radius: 0, y: date==tasks.activeDay ? 0 :(!isToday ? 0 : -20))
             .padding(.horizontal, 5)
             .scaleEffect(date==tasks.activeDay ? 1.1 : 1)
             //.offset(x: isToday ? 10 : 0, y: isToday ?  -20: 0)
