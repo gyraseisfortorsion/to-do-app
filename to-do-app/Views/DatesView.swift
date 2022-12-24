@@ -15,13 +15,14 @@ struct DatesView: View {
         ScrollView(.horizontal, showsIndicators: false){
             HStack{
                 ForEach(tasks.dates, id: \.self) {date in
-                    DateView(date: date, isToday: Calendar.current.isDate(tasks.today, inSameDayAs: date), isActive: false)
+                    DateView(date: date, isToday: Calendar.current.isDate(tasks.today, inSameDayAs: date))
                         .padding(.top, 20)
                         .onTapGesture {
                             tasks.activeDay=date
                             isActive1=true
                         }
                 }
+                
             }
             .padding(.bottom, isActive1 ? 0 : 40 )
             .padding(.top, 40)

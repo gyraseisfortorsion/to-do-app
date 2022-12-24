@@ -17,12 +17,13 @@ class TasksViewModel: ObservableObject {
     ]
     @Published var dates:[Date]=[]
     @Published var today = Date()
-    @Published var activeDay = Date()
+    @Published var activeDay = Date.now
     @Published var filteredTasks:[Task]?
     @Published var adding: Bool = false
     @Published var removing: Bool = false
-    @Published var nextTaskId: Int=3
-    @Published var maxTaskId: Int=2
+    @Published var nextTaskId: Int = 3
+    @Published var maxTaskId: Int = 2
+    @Published var isRest:Bool = false
     
     init(taskLimit:Int){
         self.taskLimit=taskLimit
@@ -69,7 +70,7 @@ class TasksViewModel: ObservableObject {
     func fetchCurrentWeek() {
         
         let cal = Calendar.current
-        let week = cal.dateInterval(of: .weekOfMonth, for: Date())
+        let week = cal.dateInterval(of: .weekOfMonth, for: Date.now.addingTimeInterval(-86400))
         guard let firstWeek = week?.start else { return }
         
         for i in 1...7 {
@@ -89,10 +90,17 @@ class TasksViewModel: ObservableObject {
     func filterTasks(){
         DispatchQueue.global(qos: .userInteractive).async {
             let calendar = Calendar.current
-             
+            
+     
             let filtered = self.tasks.filter{
                 return calendar.isDate($0.date, inSameDayAs: self.activeDay)
             }
+            
+//            if (self.isRest) {
+//                filtered = self.tasks.filter{
+//                    return calendar.isDate($0.date, inSameDayAs: self.activeDay)
+//                }
+//            }
             
             DispatchQueue.main.async{
                 withAnimation{
