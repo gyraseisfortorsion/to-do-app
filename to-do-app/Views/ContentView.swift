@@ -16,26 +16,76 @@ struct ContentView: View {
     @EnvironmentObject var TaskViewModel: TasksViewModel
     var body: some View {
         
-        VStack(spacing:20){
+        
+   
             
-            TasksView()
-            TaskField()
-            //.shadow(color: .black, radius: 5, x: 0, y: -10)
-                //.frame(width: 350, height: 100, alignment: .center)
-                .shadow(color: .white, radius: 0)
-//                .cornerRadius(10)
+            
+            VStack(spacing:20){
+                TasksView()
                 
+                TaskField()
+                    .shadow(color: .white, radius: 0)
+                    .shadow(color: .white, radius: 0)
+                    .frame(width: UIScreen.main.bounds.width, height: 100, alignment: .center)
+                    .padding(.vertical)
+                    //.cornerRadius(50)
+                    //.cornerRadius(10)
+                    //.border(.orange)
+                .background(Color.black
+                    .ignoresSafeArea()
+                    //.padding(-10)
+                    .cornerRadius(50)
+                    .shadow(color: .black, radius:0, x: 0, y: -17)
+                    .shadow(color: .white, radius:0, x: 0, y: -5)
+
+                )
+                
+                DatesView()
                 
             
-            DatesView()
-            //.flippedUpsideDown()
+            
+                //.shadow(color: .white, radius: 1, x: 0, y: -10 )
+            //.frame(width: UIScreen.main.bounds.width, height: 300)
+            //.cornerRadius(10)
+            //.shadow(color: .white, radius: 1, x: 0, y: -10 )
+            //.border(.white)
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 50)
+//                    .stroke(Color.black, lineWidth: 0)
+//                    .shadow(color: .white, radius: 1, x: 0, y: -10 )
+//            )
+            }
             //
-        }
-        .transition(.move(edge: .bottom))
-        .animation(.default)
-        .background(.black)
-        .ignoresSafeArea()
+            .transition(.move(edge: .bottom))
+            .animation(.default)
+            .background(.black)
+            .ignoresSafeArea()
+        
+        
     }
+}
+
+@ViewBuilder
+func ControlPanel()->some View{
+
+    
+        ZStack{
+            RoundedRectangle(cornerRadius: 50)
+                .shadow(color: .white, radius: 1, x: 0, y: -10 )
+        VStack{
+        TaskField()
+            .shadow(color: .white, radius: 0)
+            .shadow(color: .white, radius: 0)
+            //.frame(width: UIScreen.main.bounds.width, height: 100, alignment: .center)
+            //.cornerRadius(10)
+            //.border(.orange)
+            DatesView()
+            
+        }
+            
+        
+    }
+    
 }
 
 struct FlippedUpsideDown: ViewModifier {

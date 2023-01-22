@@ -17,28 +17,18 @@ struct TaskField: View {
             .onTapGesture {
                 isFocused = true
             }
-            //.frame(width: 350, height: 100)
             .multilineTextAlignment(.center)
             .onSubmit {
                 let dateFormatter=DateFormatter()
                 dateFormatter.dateFormat = "HH:mm_dd/MM/yy"
-
-
                 let components = enteredtext.components(separatedBy: "_")
-                
-                //                tasks.tasks.append(Task(
-                //                    title: components[0],
-                //                    date: components.count>1 ? dateFormatter.date(from: components[1]) ?? tasks.activeDay: tasks.activeDay,
-                //                    isCompleted: false))
-                
                 var newDate=tasks.activeDay
-
                 if components.count==2{
-                    //newDate =  (dateFormatter.date(from: components[1]) ?? tasks.activeDay)
+
                     let timeComponents = components[1].components(separatedBy: ":")
                     newDate = newDate.addingTimeInterval((Double(timeComponents[0]) ?? 0)*3600+(Double(timeComponents[1]) ?? 0)*60)
                 }
-                else if components.count>2{
+                else if components.count==3{
                     let temp = components[1]+"_"+components[2]
                     newDate = dateFormatter.date(from: temp) ?? tasks.activeDay
                 }
@@ -46,14 +36,10 @@ struct TaskField: View {
                     title: components[0],
                     date: newDate
                 )
-//                tasks.activeDay=dateFormatter.date(from: components[1]) ?? tasks.activeDay
                 enteredtext=""
                 tasks.activeDay=newDate
             }
-            .foregroundColor(Color.white)
-        
-        
-        
+            .foregroundColor(Color.white)  
     }
 }
 

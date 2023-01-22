@@ -17,11 +17,7 @@ struct DateView: View {
         DataTab().onTapGesture {
             tasks.activeDay=date
         }
-    
         .animation(.spring(response: 0.3, dampingFraction: 0.7))
-       
-        
-       
     }
     @ViewBuilder
     func DataTab()->some View{
@@ -32,16 +28,7 @@ struct DateView: View {
                 
                     Text(date.formatted(.dateTime.weekday())).foregroundColor(Color(.black))
                         .font(.headline)
-                        
-                                            
-                
-    //            else {
-    //                Text(date.formatted(.dateTime.weekday())).foregroundColor(Color(.black))
-    //                    .font(.body)
-    //
-    //            }
-                
-                
+
                 Image(systemName: "circle.circle.fill")
                     .foregroundColor(Color(.black))
                     .scaleEffect(date==tasks.activeDay ? 1 : 0)
@@ -57,11 +44,9 @@ struct DateView: View {
             .scaleEffect(date==tasks.activeDay ? 1.1 : 1)
             //.offset(x: isToday ? 10 : 0, y: isToday ?  -20: 0)
             .shadow(radius: date==tasks.activeDay ? 0:10)
+            //.shadow(color: .gray, radius:2, y:5)
        
         }
-        //var isActive=isActive1
-        
-        
     }
 
 }

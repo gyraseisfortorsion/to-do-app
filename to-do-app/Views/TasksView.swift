@@ -10,33 +10,20 @@ import SwiftUI
 struct TasksView: View {
     @EnvironmentObject var tasksView: TasksViewModel
     var body: some View {
-        
         List{
-            
-            Spacer()
+            //Spacer()
             if let tasks = tasksView.filteredTasks{
                 if !tasks.isEmpty{
                     ForEach(tasks){task in
                         TaskView(task:task)
                             .padding(.vertical, 5)
-                        //.flippedUpsideDown()
                     }
                     .onDelete(perform: tasksView.deleteTask)
                 }
-                
-                
-                //.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
             }
-            
-            
-            //            else{
-            //                ProgressView()
-            //            }
-            
         }
         .onChange(of: tasksView.activeDay){item in
             tasksView.filterTasks()
-            
         }
         .onChange(of: tasksView.adding){item in
             tasksView.filterTasks()

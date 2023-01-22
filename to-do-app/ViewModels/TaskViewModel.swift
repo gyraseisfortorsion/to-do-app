@@ -33,7 +33,6 @@ class TasksViewModel: ObservableObject {
     func newTask(title:String, date:Date=Date.now){
         
         adding.toggle()
-//        nextTaskId+=1
         if nextTaskId>=maxTaskId{
             maxTaskId=nextTaskId
         }
@@ -43,29 +42,16 @@ class TasksViewModel: ObservableObject {
 
     }
     func deleteTask(indexSet:IndexSet){
-   
-        //self.filterTasks()
-        //tasks.remove(atOffsets: indexSet)
-        
+ 
         for index in indexSet{
             let tempTask=filteredTasks?[index]
             nextTaskId=tempTask?.secondId ?? tasks.count
             if nextTaskId==maxTaskId{
                 maxTaskId-=1
             }
-           
-                
-                    //filteredTasks?.remove(atOffsets: indexSet)
             tasks.remove(at: tasks.firstIndex(where: {  $0.secondId == tempTask?.secondId })!)
-                   
-                
-            
-            
- 
         }
-        
         removing.toggle()
-        //filteredTasks?.remove(atOffsets: indexSet)
     }
     func fetchCurrentWeek() {
         

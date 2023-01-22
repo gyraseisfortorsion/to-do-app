@@ -16,7 +16,7 @@ struct TaskView: View {
             }
             .transition(.move(edge: .bottom))
             .animation(.spring())
-            //.background(Color.black)
+
             
     }
     @ViewBuilder
@@ -47,12 +47,10 @@ struct TaskView: View {
             .frame(width: UIScreen.main.bounds.width/1.1, height: 100, alignment: .leading)
             .background(Color(.white))
             .cornerRadius(30)
-            .shadow(color: Color.gray, radius: 10)
+            //.shadow(color: Color.gray, radius: 10)
             .scaleEffect(!isCompleted ? 1 : 0) 
         
         }
-        //.background(Color.black)
-            
             
     }
     
